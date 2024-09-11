@@ -15,6 +15,12 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+
+            // here is a comment to learn how to use github
+            // hit command+k to commit something (git-> commit in the menu)
+            // select which files you want to include in the commit.
+            // give a description of the commit
+            // select commit and push
         }
     }
 }
