@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
             // select commit and push
 
             // more changes
+
+            // Hi from the web github
         }
     }
 }
