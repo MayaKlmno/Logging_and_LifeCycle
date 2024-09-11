@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
             // select which files you want to include in the commit.
             // give a description of the commit
             // select commit and push
+
+            // more changes
         }
     }
 }
