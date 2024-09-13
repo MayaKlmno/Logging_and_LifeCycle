@@ -1,7 +1,9 @@
 package com.example.loggingandlifecycle
 
+import android.app.TaskStackBuilder
 import android.nfc.Tag
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +41,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }
