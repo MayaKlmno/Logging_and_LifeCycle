@@ -1,6 +1,7 @@
 package com.example.loggingandlifecycle
 
 import android.app.TaskStackBuilder
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.nfc.Tag
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -41,26 +42,33 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.d(TAG, "Hello from onResume")
     }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
+        Log.d(TAG, "Hello from onCreate")
+
     }
 
     override fun onStart() {
         super.onStart()
+        Log.d(TAG,"Hello from onStart")
     }
 
     override fun onPause() {
         super.onPause()
+        Log.d(TAG, "Hello from onPause")
     }
 
     override fun onStop() {
         super.onStop()
+        Log.d(TAG,"Hello from onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d(TAG, "hello fron onDestroy")
     }
 
 }
