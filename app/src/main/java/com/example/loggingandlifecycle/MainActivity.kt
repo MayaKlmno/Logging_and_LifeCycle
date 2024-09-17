@@ -6,6 +6,8 @@ import android.nfc.Tag
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
     // in java a static constant was declared how...
     // public static final int PI = 3
+    private lateinit var startStopButton: Button
+    private lateinit var resetButton: Button
+    private var start = true
 
     // in Kotlin without a static keyword we use a companion object
     companion object {
@@ -25,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        wireWidgets()
 
         Log.d(TAG, "onCreate: hi from Oncreate")
 
@@ -38,7 +44,21 @@ class MainActivity : AppCompatActivity() {
         // more changes
 
         // Hi from the web github
+
+
+        startStopButton.setOnClickListener {
+            if(start) {
+                startStopButton.text = "Stop"
+                start = false
+            } else {
+                startStopButton.text = "Start"
+                start = true
+            }
+        }
+
+
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -68,7 +88,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "hello fron onDestroy")
+        Log.d(TAG, "hello from onDestroy")
+    }
+
+    private fun wireWidgets(){
+        startStopButton = findViewById(R.id.button_mainActivity_startStop)
+        resetButton = findViewById(R.id.button_mainActivity_reset)
     }
 
 }
