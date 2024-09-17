@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Chronometer
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,9 @@ class MainActivity : AppCompatActivity() {
     // public static final int PI = 3
     private lateinit var startStopButton: Button
     private lateinit var resetButton: Button
+    private lateinit var chronometer: Chronometer
     private var start = true
+    private var isRunning = false
 
     // in Kotlin without a static keyword we use a companion object
     companion object {
@@ -35,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: hi from Oncreate")
 
 
+
+
         // here is a comment to learn how to use github
         // hit command+k to commit something (git-> commit in the menu)
         // select which files you want to include in the commit.
@@ -48,13 +53,18 @@ class MainActivity : AppCompatActivity() {
 
         startStopButton.setOnClickListener {
             if(start) {
+                chronometer.start()
                 startStopButton.text = "Stop"
                 start = false
             } else {
+                chronometer.stop()
                 startStopButton.text = "Start"
                 start = true
             }
         }
+
+
+
 
 
     }
@@ -94,6 +104,7 @@ class MainActivity : AppCompatActivity() {
     private fun wireWidgets(){
         startStopButton = findViewById(R.id.button_mainActivity_startStop)
         resetButton = findViewById(R.id.button_mainActivity_reset)
+        chronometer = findViewById(R.id.chronometer_mainActivity_stopwatch)
     }
 
 }
