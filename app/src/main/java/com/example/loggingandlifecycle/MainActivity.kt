@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         // all of the variables in here will be static
         val TAG = "MainActivity" // useful for the log functions
+        val STATE_IS_RUNNING = "is the stopwatch running"
+        val STATE_DISPLAY_TIME = "current time on stopwatch"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,13 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(TAG, "onCreate: hi from Oncreate")
 
+        // retrieve info from the savedInstanceState if it exists
+        if(savedInstanceState != null){
+            displayTime = savedInstanceState.getLong(STATE_DISPLAY_TIME)
+            // TODO: update the time
+        }
+
+
 
 
 
@@ -48,9 +57,6 @@ class MainActivity : AppCompatActivity() {
         // give a description of the commit
         // select commit and push
 
-        // more changes
-
-        // Hi from the web github
 
 
         startStopButton.setOnClickListener {
@@ -75,13 +81,9 @@ class MainActivity : AppCompatActivity() {
         resetButton.setOnClickListener {
             chronometer.stop()
             startStopButton.text = "Start"
-            //val timeInMilSeconds = 0
-            //chronometer.base = 0
+
+            chronometer.base = SystemClock.elapsedRealtime()
         }
-
-
-
-
 
     }
 
@@ -115,6 +117,23 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "hello from onDestroy")
+    }
+
+
+
+    // to maintain the state, we use the saved Instance State
+    override fun onSaveInstanceState(outState: Bundle) {
+        // calculate the display time if needed and then store
+        // the values of the display time and is Running
+
+        //The Bundle stores key-value paris
+        // while an array is an int --> object relationship,
+        // bundles are string --> object
+        // generally use constants for code readability/reuse
+        outState.putBoolean(STATE_IS_RUNNING, start)
+        outState.putLong(STATE_DISPLAY_TIME, displayTime)
+
+        super.onSaveInstanceState(outState)
     }
 
     private fun wireWidgets(){
