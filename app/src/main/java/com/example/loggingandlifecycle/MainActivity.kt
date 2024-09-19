@@ -5,6 +5,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.nfc.Tag
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.os.SystemClock
 import android.util.Log
 import android.widget.Button
 import android.widget.Chronometer
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chronometer: Chronometer
     private var start = true
     private var isRunning = false
+    private var displayTime = 0L
 
     // in Kotlin without a static keyword we use a companion object
     companion object {
@@ -53,14 +55,28 @@ class MainActivity : AppCompatActivity() {
 
         startStopButton.setOnClickListener {
             if(start) {
+                chronometer.base = SystemClock.elapsedRealtime() - displayTime
                 chronometer.start()
                 startStopButton.text = "Stop"
+                //val timeInMilSeconds =
+                //val base = SystemClock.elapsedRealtime()
+
                 start = false
             } else {
                 chronometer.stop()
+                displayTime = SystemClock.elapsedRealtime() - chronometer.base
                 startStopButton.text = "Start"
                 start = true
             }
+        }
+        //System.currentTimeMillis()
+
+
+        resetButton.setOnClickListener {
+            chronometer.stop()
+            startStopButton.text = "Start"
+            //val timeInMilSeconds = 0
+            //chronometer.base = 0
         }
 
 
