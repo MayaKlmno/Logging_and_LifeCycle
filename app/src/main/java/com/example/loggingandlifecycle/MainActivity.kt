@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var resetButton: Button
     private lateinit var chronometer: Chronometer
     private var start = true
-    private var isRunning = false
+    //private var isRunning = false
     private var displayTime = 0L
 
     // in Kotlin without a static keyword we use a companion object
@@ -44,11 +44,29 @@ class MainActivity : AppCompatActivity() {
         // retrieve info from the savedInstanceState if it exists
         if(savedInstanceState != null){
             displayTime = savedInstanceState.getLong(STATE_DISPLAY_TIME)
-            // TODO: update the time
+            start = savedInstanceState.getBoolean(STATE_IS_RUNNING)
+        }
+        chronometer.setBase(SystemClock.elapsedRealtime() - displayTime)
+        //displayTime = SystemClock.elapsedRealtime() - chronometer.getBase()
+
+        resetButton.text = "reset"
+
+        if(!start){
+            //chronometer.setBase(SystemClock.elapsedRealtime() - displayTime)
+            //chronometer.base = SystemClock.elapsedRealtime() - displayTime
+            //displayTime = SystemClock.elapsedRealtime() - chronometer.getBase()
+            chronometer.start()
+            startStopButton.text = "stop"
+
         }
 
-
-
+        if(start){
+            //chronometer.setBase(SystemClock.elapsedRealtime() - displayTime)
+            //chronometer.text = "start"
+            //chronometer.base = SystemClock.elapsedRealtime() - displayTime
+            //displayTime = SystemClock.elapsedRealtime() - chronometer.getBase()
+            //chronometer.stop()
+        }
 
 
         // here is a comment to learn how to use github
@@ -80,6 +98,7 @@ class MainActivity : AppCompatActivity() {
 
         resetButton.setOnClickListener {
             chronometer.stop()
+            displayTime = 0L
             startStopButton.text = "Start"
 
             chronometer.base = SystemClock.elapsedRealtime()
@@ -131,10 +150,15 @@ class MainActivity : AppCompatActivity() {
         // bundles are string --> object
         // generally use constants for code readability/reuse
         outState.putBoolean(STATE_IS_RUNNING, start)
+            if(!start){
+                displayTime = SystemClock.elapsedRealtime() - chronometer.getBase()
+            }
         outState.putLong(STATE_DISPLAY_TIME, displayTime)
 
         super.onSaveInstanceState(outState)
     }
+
+
 
     private fun wireWidgets(){
         startStopButton = findViewById(R.id.button_mainActivity_startStop)
